@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq1p56t4xnrug"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_al5lt"]
+[ext_resource type="Script" path="res://Canvas.gd" id="2_1tfhm"]
+[ext_resource type="Script" path="res://DrawingPreview.gd" id="3_k4wn1"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_al5lt")
+
+[node name="Canvas" type="Node2D" parent="."]
+script = ExtResource("2_1tfhm")
+
+[node name="DrawingPreview" type="Node2D" parent="."]
+script = ExtResource("3_k4wn1")

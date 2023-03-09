@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdtdlbnwgvwln"]
+
+[ext_resource type="Theme" uid="uid://bjtocp4mjh56t" path="res://default_theme.tres" id="1_ledpp"]
+[ext_resource type="Script" path="res://SwitchScreen.gd" id="2_3h8jr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gptg7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nxcjj"]
+
+[node name="SwitchScreen" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ledpp")
+script = ExtResource("2_3h8jr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Screen" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Screen: "
+
+[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_gptg7")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_nxcjj")
+
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="OK" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "OK"
