@@ -1,0 +1,192 @@
+[gd_scene load_steps=14 format=3 uid="uid://jc4dsdg1rami"]
+
+[ext_resource type="Theme" uid="uid://bjtocp4mjh56t" path="res://default_theme.tres" id="1_aeeq2"]
+[ext_resource type="Script" path="res://FileExplore/FileExplore.gd" id="2_ir3cn"]
+[ext_resource type="Texture2D" uid="uid://befouekpaeg6r" path="res://assets/arrow.svg" id="2_o2y8e"]
+[ext_resource type="Texture2D" uid="uid://dfgetv32t4mny" path="res://assets/arrow2.svg" id="3_06o3u"]
+[ext_resource type="Texture2D" uid="uid://cmvlbsy8rr6cf" path="res://assets/refresh.svg" id="4_1iau5"]
+[ext_resource type="Texture2D" uid="uid://t0dhrsxjicee" path="res://assets/arrow-pressed.svg" id="4_mjcbl"]
+[ext_resource type="Texture2D" uid="uid://cq8h3fajsbxib" path="res://assets/arrow-disabled.svg" id="5_17bd1"]
+[ext_resource type="Texture2D" uid="uid://bd0ry5g4pey30" path="res://assets/eye.svg" id="5_gsuv7"]
+[ext_resource type="Texture2D" uid="uid://bumher1mwv15p" path="res://assets/arrow2-pressed.svg" id="7_w3skj"]
+[ext_resource type="Texture2D" uid="uid://c0qe27p7i1dm8" path="res://assets/refresh-pressed.svg" id="9_dc1y3"]
+[ext_resource type="Texture2D" uid="uid://d250mfedb5fob" path="res://assets/eye-pressed.svg" id="11_ujekv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nokp0"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wu5gy"]
+font_size = 24
+
+[node name="FileExplore" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_aeeq2")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nokp0")
+script = ExtResource("2_ir3cn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TopBar" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TopBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TopBar/TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Back" type="TextureButton" parent="MarginContainer/VBoxContainer/TopBar/TopBar/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("2_o2y8e")
+texture_pressed = ExtResource("4_mjcbl")
+texture_disabled = ExtResource("5_17bd1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Front" type="TextureButton" parent="MarginContainer/VBoxContainer/TopBar/TopBar/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("2_o2y8e")
+texture_pressed = ExtResource("4_mjcbl")
+texture_disabled = ExtResource("5_17bd1")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
+
+[node name="UpDir" type="TextureButton" parent="MarginContainer/VBoxContainer/TopBar/TopBar/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("3_06o3u")
+texture_pressed = ExtResource("7_w3skj")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TopBar/TopBar"]
+layout_mode = 2
+text = "Path:"
+
+[node name="Directory" type="LineEdit" parent="MarginContainer/VBoxContainer/TopBar/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Refresh" type="TextureButton" parent="MarginContainer/VBoxContainer/TopBar/TopBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture_normal = ExtResource("4_1iau5")
+texture_pressed = ExtResource("9_dc1y3")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ShowHide" type="TextureButton" parent="MarginContainer/VBoxContainer/TopBar/TopBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("5_gsuv7")
+texture_pressed = ExtResource("11_ujekv")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CreateFolder" type="Button" parent="MarginContainer/VBoxContainer/TopBar/TopBar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create Folder"
+
+[node name="Center" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Center"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Center/VBoxContainer"]
+layout_mode = 2
+text = "Directories & Files:"
+label_settings = SubResource("LabelSettings_wu5gy")
+
+[node name="FileList" type="PanelContainer" parent="MarginContainer/VBoxContainer/Center/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Center/VBoxContainer/FileList"]
+layout_mode = 2
+
+[node name="Files" type="ItemList" parent="MarginContainer/VBoxContainer/Center/VBoxContainer/FileList/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+fixed_icon_size = Vector2i(16, 16)
+
+[node name="FileSelect" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/FileSelect"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/FileSelect/HBoxContainer"]
+layout_mode = 2
+text = "File:"
+
+[node name="File" type="LineEdit" parent="MarginContainer/VBoxContainer/FileSelect/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Filter" type="OptionButton" parent="MarginContainer/VBoxContainer/FileSelect/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "All Files (*)"
+popup/item_0/id = 50
+
+[node name="Button" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Button"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OK" type="Button" parent="MarginContainer/VBoxContainer/Button/HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "OK
+"
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/Button/HBoxContainer/CenterContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel
+"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+size = Vector2i(500, 300)
