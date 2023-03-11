@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://7suun4jis5or"]
+
+[ext_resource type="Script" path="res://FileExplore/ExploreWindow.gd" id="1_7ssx8"]
+[ext_resource type="PackedScene" uid="uid://jc4dsdg1rami" path="res://FileExplore/FileExplore.tscn" id="2_k3ahd"]
+
+[node name="ExploreWindow" type="Window"]
+script = ExtResource("1_7ssx8")
+
+[node name="FileExplore" parent="." instance=ExtResource("2_k3ahd")]
