@@ -1,3 +1,4 @@
+## Deprecated: Unnecessary to use
 extends Window
 
 func _ready():

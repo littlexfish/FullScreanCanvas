@@ -153,22 +153,12 @@ func save_image(additionFunc: Callable, title := 'Save'):
 		fileDialog.current_path = can.savingPath
 	fileDialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	# FIXME: filter in FileDialog has some problem
-	fileDialog.add_filter('png', '.png')
-	fileDialog.add_filter('jpg', '.jpg')
-	fileDialog.add_filter('webp', '.webp')
-	fileDialog.add_filter('exr', '.exr')
+	fileDialog.add_filter('*.png', 'png')
+	fileDialog.add_filter('*.jpg', 'jpg')
+	fileDialog.add_filter('*.webp', 'webp')
+	fileDialog.add_filter('*.exr', 'exr')
 	fileDialog.file_selected.connect(func(path: String):
-		var spl = path.rsplit('.', false, 1)
-		var ext = spl[1]
-		if ext.begins_with('jpg'):
-			ext = 'jpg'
-		elif ext.begins_with('exr'):
-			ext = 'exr'
-		elif ext.begins_with('webp'):
-			ext = 'webp'
-		else:
-			ext = 'png'
-		mainNode.save(spl[0] + '.' + ext, ext)
+		mainNode.save(path, path.rsplit('.', false, 1)[-1])
 		fileDialog.queue_free()
 		mainNode.raise_controller()
 		additionFunc.call(path)
@@ -237,7 +227,7 @@ func _changeCanvasMode():
 		mainNode.raise_controller()
 	mainNode.check_canvas_screen_idx()
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.is_pressed():
 			if event.is_command_or_control_pressed():
@@ -258,7 +248,18 @@ func _input(event):
 							mainNode.controller.emit_save_as()
 						else:
 							mainNode.controller.emit_save()
+					_: 
+						return
+				_handle_input()
 				return
 			match event.keycode:
 				KEY_ESCAPE:
 					mainNode.raise_controller()
+				_: 
+					return
+			_handle_input()
+			return
+
+
+func _handle_input():
+	get_viewport().set_input_as_handled()

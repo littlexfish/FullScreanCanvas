@@ -1,3 +1,4 @@
+## Deprecated: Unnecessary to use
 extends PanelContainer
 
 const FOLDER_CREATER = preload("res://FileExplore/FolderCreater.tscn")

@@ -1,3 +1,4 @@
+## Deprecated: Unnecessary to use
 extends Window
 
 signal folder_create(n: String)

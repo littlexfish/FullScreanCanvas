@@ -94,7 +94,7 @@ func check_canvas_screen_idx():
 	if w.current_screen != canvasScreen:
 		get_window().current_screen = canvasScreen
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.is_pressed():
 			if event.is_command_or_control_pressed():
@@ -115,10 +115,17 @@ func _input(event):
 							controller.emit_save_as()
 						else:
 							controller.emit_save()
+					_:
+						return
+				_handle_input()
 				return
 			match event.keycode:
 				KEY_ESCAPE:
 					raise_controller()
+				_: 
+					return
+			_handle_input()
+			return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			isMousePressed = event.is_pressed()
@@ -126,11 +133,14 @@ func _input(event):
 				$DrawingPreview.on_draw_first(event.position)
 			else:
 				$DrawingPreview.on_draw_end()
+			_handle_input()
 	if event is InputEventMouseMotion:
 		if isMousePressed:
 			$DrawingPreview.on_draw(event.relative)
+			_handle_input()
 
-
+func _handle_input():
+	get_viewport().set_input_as_handled()
 
 
 
