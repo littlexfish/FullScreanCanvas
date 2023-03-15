@@ -22,10 +22,13 @@ Switch Screen: Ctrl+M
 
 ## Future Functions
 
-- Process "Save" and "Save As" normally
 - Add more pen types
 - Add eraser that can erase the handwriting
 - Make it can paste the picture
 - Re-design the ui theme
 - Support pressure to change pen size
+
+## As Known Problems
+
+- Unreachable mode cannot implement now, because the passthrough polygon will not draw anythings outside the polygon.
 

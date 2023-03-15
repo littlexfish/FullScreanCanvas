@@ -240,14 +240,14 @@ func _unhandled_input(event):
 					KEY_Y:
 						mainNode.canvas.do_redo()
 					KEY_M:
-						mainNode.controller.emit_switch_screen()
+						emit_switch_screen()
 					KEY_N:
-						mainNode.controller.emit_new()
+						emit_new()
 					KEY_S:
 						if event.shift_pressed:
-							mainNode.controller.emit_save_as()
+							emit_save_as()
 						else:
-							mainNode.controller.emit_save()
+							emit_save()
 					_: 
 						return
 				_handle_input()

@@ -9,8 +9,10 @@ var enable = true :
 var canFocus = true :
 	set(value):
 		canFocus = value
-		get_tree().get_root().unfocusable = not value
+		get_tree().get_root().mouse_passthrough = false
+		get_tree().get_root().mouse_passthrough_polygon = passthrough if not value else PackedVector2Array()
 
+var passthrough = PackedVector2Array([Vector2(), Vector2(), Vector2(), Vector2()])
 var isMousePressed = false
 
 
@@ -73,6 +75,8 @@ func raise_controller():
 
 
 func save(path: String, ext: String):
+	enable = true
+	canFocus = true
 	var img = get_viewport().get_texture().get_image()
 	match ext:
 		'jpg':
@@ -94,6 +98,9 @@ func check_canvas_screen_idx():
 	var w = get_window()
 	if w.current_screen != canvasScreen:
 		get_window().current_screen = canvasScreen
+
+func _draw():
+	draw_polygon(passthrough, PackedColorArray([Color.VIOLET]))
 
 func _unhandled_input(event):
 	if event is InputEventKey:
@@ -127,18 +134,19 @@ func _unhandled_input(event):
 					return
 			_handle_input()
 			return
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			isMousePressed = event.is_pressed()
+	if canFocus:
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				isMousePressed = event.is_pressed()
+				if isMousePressed:
+					$DrawingPreview.on_draw_first(event.position)
+				else:
+					$DrawingPreview.on_draw_end()
+				_handle_input()
+		if event is InputEventMouseMotion:
 			if isMousePressed:
-				$DrawingPreview.on_draw_first(event.position)
-			else:
-				$DrawingPreview.on_draw_end()
-			_handle_input()
-	if event is InputEventMouseMotion:
-		if isMousePressed:
-			$DrawingPreview.on_draw(event.relative)
-			_handle_input()
+				$DrawingPreview.on_draw(event.relative)
+				_handle_input()
 
 func _handle_input():
 	get_viewport().set_input_as_handled()
